@@ -34,7 +34,13 @@ const parseAndValidateCSV = (csvText) => {
     throw new Error('O arquivo CSV está vazio.');
   }
 
-  const validatedData = result.data.map(row => {
+  const filteredData = result.data.filter(row => row.latitude != null && row.longitude != null);
+
+  if (filteredData.length === 0) {
+    throw new Error('O arquivo CSV está vazio.');
+  }
+
+  const validatedData = filteredData.map(row => {
     if (typeof row.latitude === 'undefined' || typeof row.longitude === 'undefined') {
       throw new Error('O arquivo CSV deve conter colunas \'latitude\' e \'longitude\'.');
     }

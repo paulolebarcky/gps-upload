@@ -23,6 +23,7 @@ const parseAndValidateCSV = (csvText) => {
   const result = Papa.parse(decodedCsvText, {
     header: true,
     dynamicTyping: true,
+    skipEmptyLines: true,
   });
 
   if (result.errors.length > 0) {
